@@ -1,4 +1,5 @@
 const userRepository = require('../repositories/User');
+const jwt = require("jsonwebtoken")
 
 const authenticate = async (username, password) => {
   // Busca o usuário no banco pelo username
@@ -13,8 +14,7 @@ const authenticate = async (username, password) => {
   }
 
   // Gera o token JWT
-  const token = jwtUtils.generateToken({ id: user.id, role: user.role });
-
+  const token = jwt.sign({ id: user.id, tipo: user.tipo }, process.env.SECRET, {expiresIn: process.env.TOKEN_EXPIRATION});
   return token;
 };
 
