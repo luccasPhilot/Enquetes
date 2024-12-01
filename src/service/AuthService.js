@@ -5,11 +5,10 @@ const authenticate = async (username, password) => {
   const user = await userRepository.findByUsername(username);
   if (!user) {
     throw new Error('Usuário não encontrado.');
-  }
+  } 
 
   // Verifica se a senha está correta
-  const isPasswordValid = await bcrypt.compare(password, user.password);
-  if (!isPasswordValid) {
+  if (password !== user.password) {
     throw new Error('Credenciais inválidas.');
   }
 

@@ -1,7 +1,7 @@
 [
     {
-      "usuario": "admin",
-      "senha": "1234",
+      "username": "admin",
+      "password": "1234",
       "tipo": "admin"
     }
 ]
