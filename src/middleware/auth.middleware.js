@@ -1,36 +1,39 @@
-import jwt from "jsonwebtoken"
+const jwt = require("jsonwebtoken");
+const users = require("../service/UserService");
 
 const authMiddleware = (req, res, next) => {
-
     try {
-        const { authorization } = req.headers
+        const { authorization } = req.headers;
 
-        if (!authorization) return res.send(401);
+        console.log(authorization);
+        if (!authorization) return res.sendStatus(401);
 
         const parts = authorization.split(" ");
 
-        if (parts.lenght !== 2) return res.send(401);
+        if (parts.length !== 2) return res.sendStatus(401); // Corrigido `length`
 
         const [schema, token] = parts;
 
-        if (schema !== "Bearer") return res.send(401);
-
+        if (schema !== "Bearer") return res.sendStatus(401);
+        
         jwt.verify(token, process.env.SECRET, (error, decoded) => {
             if (error) {
                 return res.status(500).send({ message: "Token inválido" });
-                //let user = Usuario.getById(decoded.id) Fazer a busca por usuario!
             }
-            req.userId = decoded.id
-            req.userTipo = decoded.tipo
+            
+            const user = users.getUser(decoded.id);
+            if (!user) return res.status(404).send({ message: "Usuário não encontrado" });
+            
+            req.userId = user.id;
+            req.userTipo = user.tipo;
 
             return next();
         });
     } catch (err) {
         res.status(500).send(err.message);
     }
-
-}
+};
 
 module.exports = {
     authMiddleware,
-}
+};

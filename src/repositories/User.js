@@ -37,8 +37,13 @@ const updateUser = async (username, updatedData) => {
   return null;
 };
 
+const listAllUsers = async () => {
+  return readFile();
+};
+
 module.exports = {
   findByUsername,
   saveUser,
-  updateUser
+  updateUser,
+  listAllUsers
 }
