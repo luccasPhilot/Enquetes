@@ -14,7 +14,7 @@ const authenticate = async (username, password) => {
   }
 
   // Gera o token JWT
-  const token = jwt.sign({ id: user.id, tipo: user.tipo }, process.env.SECRET, {expiresIn: process.env.TOKEN_EXPIRATION});
+  const token = jwt.sign({ id: user.username, tipo: user.tipo }, process.env.SECRET, {expiresIn: process.env.TOKEN_EXPIRATION});
   return token;
 };
 

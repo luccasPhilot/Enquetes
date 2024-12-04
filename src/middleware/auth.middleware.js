@@ -5,7 +5,6 @@ const authMiddleware = (req, res, next) => {
     try {
         const { authorization } = req.headers;
 
-        console.log(authorization);
         if (!authorization) return res.sendStatus(401);
 
         const parts = authorization.split(" ");
@@ -16,16 +15,17 @@ const authMiddleware = (req, res, next) => {
 
         if (schema !== "Bearer") return res.sendStatus(401);
         
-        jwt.verify(token, process.env.SECRET, (error, decoded) => {
+        jwt.verify(token, process.env.SECRET, async(error, decoded) => {
             if (error) {
                 return res.status(500).send({ message: "Token inválido" });
             }
             
-            const user = users.getUser(decoded.id);
+            const user = await users.getUser(decoded.id);
             if (!user) return res.status(404).send({ message: "Usuário não encontrado" });
             
-            req.userId = user.id;
+            req.userId = user.username;
             req.userTipo = user.tipo;
+            
 
             return next();
         });
