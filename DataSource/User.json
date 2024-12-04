@@ -12,5 +12,12 @@
     "tipo": "admin",
     "email": "luccas@gmail.com",
     "cidade": "Londrina"
+  },
+  {
+    "username": "teste",
+    "password": "123456",
+    "tipo": "user",
+    "email": "luccas@gmail.com",
+    "cidade": "maringa"
   }
 ]

@@ -33,11 +33,11 @@ const updateUser = async (username, updatedData, userId, userTipo) => {
   if (!user) {
     throw new Error('Usuário não encontrado.');
   }
-  if (userTipo !== 'admin') {
-    throw new Error('Permissão negada.');
-  }
   if (updatedData.tipo && userTipo !== 'admin') {
     throw new Error('Apenas administradores podem alterar o tipo do usuário.');
+  }
+  if (userTipo !== 'admin' && username !== userId) {
+    throw new Error('Permissão negada, você não tem permissão para alterar outro usuário');
   }
   return await userRepository.updateUser(username, updatedData);
 };
