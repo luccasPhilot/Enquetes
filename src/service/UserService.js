@@ -8,12 +8,21 @@ const createUser = async (user, userId, userTipo) => {
   if (existingUser) {
     throw new Error('Usuário já existe.');
   }
+
+  // Verificação de campos obrigatórios
+  const requiredFields = ['username', 'password', 'tipo', 'email', 'cidade'];
+  const missingFields = requiredFields.filter(field => !user[field]);
+  if (missingFields.length > 0) {
+    throw new Error(`Os seguintes campos são obrigatórios: ${missingFields.join(', ')}`);
+  }
+
   if (!['admin', 'user'].includes(user.tipo)) {
     throw new Error('O tipo deve ser "admin" ou "user".');
   }
   await userRepository.saveUser(user);
   return user;
 };
+
 
 const getUser = async (username) => {
   return await userRepository.findByUsername(username);
@@ -24,7 +33,7 @@ const updateUser = async (username, updatedData, userId, userTipo) => {
   if (!user) {
     throw new Error('Usuário não encontrado.');
   }
-  if (userTipo !== 'admin' && userId !== username) {
+  if (userTipo !== 'admin') {
     throw new Error('Permissão negada.');
   }
   if (updatedData.tipo && userTipo !== 'admin') {
@@ -37,13 +46,7 @@ const deleteUser = async (username, userId, userTipo) => {
   if (userTipo !== 'admin') {
     throw new Error('Apenas administradores podem excluir usuários.');
   }
-  const user = await userRepository.findByUsername(username);
-  if (!user) {
-    throw new Error('Usuário não encontrado.');
-  }
-  const users = userRepository.readFile();
-  const filteredUsers = users.filter((u) => u.username !== username);
-  userRepository.writeFile(filteredUsers);
+  userRepository.deleteUser(username)
 };
 
 module.exports = {

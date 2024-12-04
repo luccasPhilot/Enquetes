@@ -37,6 +37,17 @@ const updateUser = async (username, updatedData) => {
   return null;
 };
 
+const deleteUser = async (username) => {
+  const user = await findByUsername(username);
+  if (!user) {
+    throw new Error('Usuário não encontrado.');
+  }
+  const users = readFile();
+  const filteredUsers = users.filter((u) => u.username !== username);
+  writeFile(filteredUsers);
+  
+};
+
 const listAllUsers = async () => {
   return readFile();
 };
@@ -45,5 +56,6 @@ module.exports = {
   findByUsername,
   saveUser,
   updateUser,
+  deleteUser,
   listAllUsers
 }

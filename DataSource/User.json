@@ -2,11 +2,15 @@
   {
     "username": "admin",
     "password": "1234",
-    "tipo": "admin"
+    "tipo": "admin",
+    "email": "teste@teste.com",
+    "cidade": "teste"
   },
   {
     "username": "Luccas",
-    "password": "129934",
-    "tipo": "admin"
+    "password": "1234",
+    "tipo": "admin",
+    "email": "luccas@gmail.com",
+    "cidade": "Londrina"
   }
 ]
