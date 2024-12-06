@@ -1,7 +1,6 @@
 const fs = require('fs');
 const path = require('path');
 
-// Caminho para o arquivo JSON onde os dados serão armazenados
 const filePath = path.join(__dirname, '..', '..', 'DataSource', 'User.json');
 
 // Função para ler o arquivo JSON

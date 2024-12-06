@@ -10,10 +10,10 @@ const createUser = async (user, userId, userTipo) => {
   }
 
   // Verificação de campos obrigatórios
-  const requiredFields = ['username', 'password', 'tipo', 'email', 'cidade'];
-  const missingFields = requiredFields.filter(field => !user[field]);
-  if (missingFields.length > 0) {
-    throw new Error(`Os seguintes campos são obrigatórios: ${missingFields.join(', ')}`);
+  const camposObrigatorios = ['username', 'password', 'tipo', 'email', 'cidade'];
+  const camposFaltantes = camposObrigatorios.filter(field => !user[field]);
+  if (camposFaltantes.length > 0) {
+    throw new Error(`Os seguintes campos são obrigatórios: ${camposFaltantes.join(', ')}`);
   }
 
   if (!['admin', 'user'].includes(user.tipo)) {
