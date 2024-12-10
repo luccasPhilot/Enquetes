@@ -9,13 +9,6 @@ const createUser = async (user, userId, userTipo) => {
     throw new Error('Usuário já existe.');
   }
 
-  // Verificação de campos obrigatórios
-  const camposObrigatorios = ['username', 'password', 'tipo', 'email', 'cidade'];
-  const camposFaltantes = camposObrigatorios.filter(field => !user[field]);
-  if (camposFaltantes.length > 0) {
-    throw new Error(`Os seguintes campos são obrigatórios: ${camposFaltantes.join(', ')}`);
-  }
-
   if (!['admin', 'user'].includes(user.tipo)) {
     throw new Error('O tipo deve ser "admin" ou "user".');
   }
@@ -45,6 +38,13 @@ const updateUser = async (username, updatedData, userId, userTipo) => {
 const deleteUser = async (username, userId, userTipo) => {
   if (userTipo !== 'admin') {
     throw new Error('Apenas administradores podem excluir usuários.');
+  }
+  const user = await userRepository.findByUsername(username);
+  if (!user) {
+    throw new Error('Usuário não encontrado.');
+  }
+  if(user.tipo === 'admin'){
+    throw new Error('Você não possui permissão para excluir um usuário administrador');
   }
   userRepository.deleteUser(username)
 };

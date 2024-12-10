@@ -19,6 +19,42 @@ const findEnqueteById = async (Id) => {
   return Enquetes.find((Enquete) => Enquete.id === Id) || null;
 };
 
+const saveEnquete = async (enquete) => {
+  const enquetes = readFile();
+  enquetes.push(enquete);
+  writeFile(enquetes);
+};
+
+const updateEnquete = async (id, updatedData) => {
+  const enquetes = readFile();
+  const index = enquetes.findIndex((enquete) => enquete.id === id);
+  if (index !== -1) {
+    enquetes[index] = { ...enquetes[index], ...updatedData };
+    writeFile(enquetes);
+    return enquetes[index];
+  }
+  return null;
+};
+
+const deleteEnquete = async (id) => {
+  const enquete = await findEnqueteById(id);
+  if (!enquete) {
+    throw new Error('Enquete não encontrada.');
+  }
+  const enquetes = readFile();
+  const filteredEnquetes = enquetes.filter((e) => e.id !== id);
+  writeFile(filteredEnquetes);
+  
+};
+
+const listAllEnquetes = async () => {
+  return readFile();
+};
+
 module.exports = {
-    findEnqueteById
+    findEnqueteById,
+    saveEnquete,
+    updateEnquete,
+    deleteEnquete,
+    listAllEnquetes
 }
