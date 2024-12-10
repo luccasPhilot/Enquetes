@@ -1,6 +1,6 @@
 const userRepository = require('../repositories/User');
 
-const createUser = async (user, userId, userTipo) => {
+const createUser = async (user, userTipo) => {
   if (userTipo !== 'admin') {
     throw new Error('Apenas administradores podem criar usuários.');
   }

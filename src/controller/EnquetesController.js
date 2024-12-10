@@ -14,8 +14,19 @@ const getEnquete = async (req, res) => {
     }
 }
 
+const createEnquete = async (req, res) => {
+    try {
+        const enquete = req.body;
+        const createEnquete = await enqueteService.createEnquete(enquete);
+        res.status(201).json(createEnquete);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
+
 module.exports = {
-    getEnquete
+    getEnquete,
+    createEnquete
 }
 
 
