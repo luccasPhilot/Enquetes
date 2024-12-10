@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const filePath = path.join(__dirname, '..', '..', 'DataSource', 'equete.json');
+const filePath = path.join(__dirname, '..', '..', 'DataSource', 'enquete.json');
 
 // Função para ler o arquivo JSON
 const readFile = () => {
@@ -14,9 +14,9 @@ const writeFile = (data) => {
   fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
 };
 
-const findEnqueteById = async (Id) => {
+const findEnqueteById = async (id) => {
   const Enquetes = readFile();
-  return Enquetes.find((Enquete) => Enquete.id === Id) || null;
+  return Enquetes.find((Enquete) => Enquete.id === Number(id)) || null;
 };
 
 const saveEnquete = async (enquete) => {
