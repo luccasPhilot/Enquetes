@@ -12,10 +12,30 @@ const createEnquete = async (enquete) => {
 
     await enqueteRepository.saveEnquete(enqueteId);
     return enqueteId;
-}
+};
 
+const updateEnquete = async (id, updatedData) => {
+    const enquete = await enqueteRepository.findEnqueteById(id);
+    if (!enquete) {
+        throw new Error('Enquete não encontrada.');
+    }
+    if (updatedData.id) {
+        throw new Error('Não é permitido alterar o Id da Enquete.');
+    }
+    return await enqueteRepository.updateEnquete(id, updatedData);
+};
+
+const deleteEnquete = async (id) => {
+    const enquete = await enqueteRepository.findEnqueteById(id);
+    if (!enquete) {
+        throw new Error('Enquete não encontrada.');
+    }
+    enqueteRepository.deleteEnquete(id)
+};
 
 module.exports = {
     getEnquete,
-    createEnquete
+    createEnquete,
+    deleteEnquete,
+    updateEnquete
 }

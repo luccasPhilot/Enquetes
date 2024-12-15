@@ -1,12 +1,20 @@
 const express = require('express');
 const enquetes = require("../controller/EnquetesController")
 const auth = require("../middleware/auth.middleware")
+const validaEnquete = require("../middleware/validaCamposPermitidos.middleware")
 
 const router = express.Router();
 
 router.get("/:id", auth.authMiddleware, enquetes.getEnquete);
-// router.put("/altera/:id",);
-router.post("/create", auth.authMiddleware, enquetes.createEnquete);
-// router.delete("/delete/:id",);
+router.put("/:id", 
+    auth.authMiddleware,
+    validaEnquete.validarCamposPermitidos(["titulo", "descricao"]),
+    enquetes.updateEnquete);
+
+router.post("/", 
+    auth.authMiddleware,
+    validaEnquete.validarCamposPermitidos(["titulo", "descricao"]), 
+    enquetes.createEnquete);
+router.delete("/:id", auth.authMiddleware, enquetes.deleteEnquete);
 
 module.exports = router;

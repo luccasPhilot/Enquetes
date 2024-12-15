@@ -27,7 +27,7 @@ const saveEnquete = async (enquete) => {
 
 const updateEnquete = async (id, updatedData) => {
   const enquetes = readFile();
-  const index = enquetes.findIndex((enquete) => enquete.id === id);
+  const index = enquetes.findIndex((enquete) => enquete.id === Number(id));
   if (index !== -1) {
     enquetes[index] = { ...enquetes[index], ...updatedData };
     writeFile(enquetes);
@@ -42,7 +42,7 @@ const deleteEnquete = async (id) => {
     throw new Error('Enquete não encontrada.');
   }
   const enquetes = readFile();
-  const filteredEnquetes = enquetes.filter((e) => e.id !== id);
+  const filteredEnquetes = enquetes.filter((e) => e.id !== Number(id));
   writeFile(filteredEnquetes);
   
 };
