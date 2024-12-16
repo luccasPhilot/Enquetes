@@ -13,9 +13,12 @@ const createUser = async (req, res) => {
 const getUser = async (req, res) => {
     try {
         const { username } = req.params;
-        const user = await userService.getUser(username);
+        const user = await userService.getUser(username, req.userId, req.userTipo);
         if (!user) {
             return res.status(404).json({ message: 'Usuário não encontrado.' });
+        }
+        if (user === 1) {
+            return res.status(404).json({ message: 'Permissão negada, você não tem permissão para visualizar outro usuário' });
         }
         res.status(200).json(user);
     } catch (error) {

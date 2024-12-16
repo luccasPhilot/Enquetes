@@ -5,7 +5,7 @@ const validaEnquete = require("../middleware/validaCamposPermitidos.middleware")
 
 const router = express.Router();
 
-router.get("/:id", auth.authMiddleware, enquetes.getEnquete);
+router.get("/:id", enquetes.getEnquete);
 router.put("/:id", 
     auth.authMiddleware,
     validaEnquete.validarCamposPermitidos(["titulo", "descricao"]),

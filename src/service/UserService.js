@@ -17,7 +17,14 @@ const createUser = async (user, userTipo) => {
 };
 
 
-const getUser = async (username) => {
+const getUser = async (username, userId, userTipo) => {
+  const user =  await userRepository.findByUsername(username);
+  if (!user) {
+    return null
+  }
+  if (userTipo !== 'admin' && username !== userId) {
+    return 1
+  }
   return await userRepository.findByUsername(username);
 };
 
@@ -43,7 +50,7 @@ const deleteUser = async (username, userId, userTipo) => {
   if (!user) {
     throw new Error('Usuário não encontrado.');
   }
-  if(user.tipo === 'admin'){
+  if (user.tipo === 'admin') {
     throw new Error('Você não possui permissão para excluir um usuário administrador');
   }
   userRepository.deleteUser(username)
