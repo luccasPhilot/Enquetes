@@ -1,17 +1,17 @@
 [
-    {
-        "id": 1,
-        "EnqueteId": 1,
-        "opcao": "A"
-    },
-    {
-        "id": 1,
-        "EnqueteId": 1,
-        "opcao": "B"
-    },
-    {
-        "id": 3,
-        "EnqueteId": 1,
+  {
+    "id": 1,
+    "EnqueteId": 1,
+    "opcao": "A"
+  },
+  {
+    "id": 2,
+    "EnqueteId": 1,
+    "opcao": "B"
+  },
+  {
+    "id": 3,
+    "EnqueteId": 1,
         "opcao": "C"
-    }
+  }
 ]
