@@ -60,12 +60,27 @@ const listEnquetesPaginacao = async (req, res) => {
     }
 };
 
+const listarEnqueteCompleta = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const enqueteCompleta = await enqueteService.getEnqueteCompleta(id);
+        if (!enqueteCompleta) {
+            return res.status(404).json({ message: 'Enquete não encontrada.' })
+        }
+        res.status(200).json(enqueteCompleta)
+
+    } catch (error) {
+        res.status(400).json({ message: error.message })
+    }
+}
+
 module.exports = {
     getEnquete,
     createEnquete,
     updateEnquete,
     deleteEnquete,
-    listEnquetesPaginacao
+    listEnquetesPaginacao,
+    listarEnqueteCompleta
 }
 
 

@@ -1,4 +1,5 @@
 const enqueteRepository = require('../repositories/Enquete');
+const OpcoesEnqueteService = require('../service/OpcoesEnqueteService');
 
 const getEnquete = async (id) => {
     return enqueteRepository.findEnqueteById(id);
@@ -54,10 +55,23 @@ const getPaginacaoEnquetes = async (limite, pagina) => {
     return allEnquetes.slice(startIndex, endIndex);
 }
 
+const getEnqueteCompleta = async (id) => {
+    const enquete = await enqueteRepository.findEnqueteById(id);
+    if (!enquete) {
+        throw new Error('Enquete não encontrada.');
+    }
+    const OpcoesEnquete = await OpcoesEnqueteService.listOpcoesEnquetesId(id)
+    return {
+        ...enquete,
+        opcoes: OpcoesEnquete
+    };
+};
+
 module.exports = {
     getEnquete,
     createEnquete,
     deleteEnquete,
     updateEnquete,
-    getPaginacaoEnquetes
+    getPaginacaoEnquetes,
+    getEnqueteCompleta
 }

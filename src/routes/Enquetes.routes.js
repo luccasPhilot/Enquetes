@@ -19,4 +19,6 @@ router.delete("/:id", auth.authMiddleware, enquetes.deleteEnquete);
 
 router.get("/", enquetes.listEnquetesPaginacao);
 
+router.get("/EnqueteCompleta/:id", enquetes.listarEnqueteCompleta)
+
 module.exports = router;

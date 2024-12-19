@@ -62,10 +62,17 @@ const getPaginacaoOpcoesEnquetes = async (limite, pagina) => {
     return allOpcoesEnquetes.slice(startIndex, endIndex);
 }
 
+const listOpcoesEnquetesId = async (id) => {
+    const allOpcoesEnquetes = await opcoesEnqueteRepository.listAllOpcaoEnquetes();
+    const filteredOpcoesEnquetes = allOpcoesEnquetes.filter(opcao => opcao.EnqueteId === Number(id));
+    return filteredOpcoesEnquetes;
+};
+
 module.exports = {
     getOpcaoEnquete,
     createOpcaoEnquete,
     updateOpcaoEnquete,
     deleteOpcaoEnquete,
-    getPaginacaoOpcoesEnquetes
+    getPaginacaoOpcoesEnquetes,
+    listOpcoesEnquetesId
 }
