@@ -20,12 +20,11 @@ const authMiddleware = (req, res, next) => {
                 return res.status(500).send({ message: "Token inválido" });
             }
             
-            const user = await users.getUser(decoded.id);
+            const user = await users.getUserId(decoded.id);
             if (!user) return res.status(404).send({ message: "Usuário não encontrado" });
             
             req.userId = user.username;
             req.userTipo = user.tipo;
-            
 
             return next();
         });

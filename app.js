@@ -1,4 +1,7 @@
 const express = require("express")
+const swaggerUi = require('swagger-ui-express');
+const swaggerSpec = require('./src/swagger');
+
 require('dotenv').config();
 const app = express()
 
@@ -26,6 +29,8 @@ app.get("/install", async (req, res) => {
         res.status(400).json({ message: error.message });
     }
 });
+
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.listen(process.env.PORT, () => {
     console.log(`Servidor rodando em http://localhost:${process.env.PORT}`);

@@ -28,6 +28,10 @@ const getUser = async (username, userId, userTipo) => {
   return await userRepository.findByUsername(username);
 };
 
+const getUserId = async (username) => {
+  return await userRepository.findByUsername(username);
+};
+
 const updateUser = async (username, updatedData, userId, userTipo) => {
   const user = await userRepository.findByUsername(username);
   if (!user) {
@@ -61,4 +65,5 @@ module.exports = {
   getUser,
   updateUser,
   deleteUser,
+  getUserId
 };
