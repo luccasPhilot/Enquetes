@@ -6,15 +6,17 @@ const validaEnquete = require("../middleware/validaCamposPermitidos.middleware")
 const router = express.Router();
 
 router.get("/:id", enquetes.getEnquete);
-router.put("/:id", 
+router.put("/:id",
     auth.authMiddleware,
     validaEnquete.validarCamposPermitidos(["titulo", "descricao"]),
     enquetes.updateEnquete);
 
-router.post("/", 
+router.post("/",
     auth.authMiddleware,
-    validaEnquete.validarCamposPermitidos(["titulo", "descricao"]), 
+    validaEnquete.validarCamposPermitidos(["titulo", "descricao"]),
     enquetes.createEnquete);
 router.delete("/:id", auth.authMiddleware, enquetes.deleteEnquete);
+
+router.get("/", enquetes.listEnquetesPaginacao);
 
 module.exports = router;

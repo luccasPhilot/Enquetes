@@ -48,11 +48,24 @@ const deleteOpcaoEnquete = async (req, res) => {
     }
 };
 
+const listOpcoesEnquetesPaginacao = async (req, res) => {
+    try {
+        const { limite, pagina } = req.query;
+
+        const result = await OpcoesEnqueteService.getPaginacaoOpcoesEnquetes(limite, pagina);
+
+        res.status(200).json(result);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+}
+
 module.exports = {
     getOpcaoEnquete,
     createOpcaoEnquete,
     updateOpcaoEnquete,
-    deleteOpcaoEnquete
+    deleteOpcaoEnquete,
+    listOpcoesEnquetesPaginacao
 }
 
 

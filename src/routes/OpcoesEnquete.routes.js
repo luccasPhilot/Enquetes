@@ -18,4 +18,6 @@ router.post("/",
 
 router.delete("/:id", auth.authMiddleware, opcaoEnquetes.deleteOpcaoEnquete);
 
+router.get("/", opcaoEnquetes.listOpcoesEnquetesPaginacao);
+
 module.exports = router;

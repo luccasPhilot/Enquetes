@@ -42,9 +42,21 @@ const deleteEnquete = async (req, res) => {
     try {
         const { id } = req.params;
         await enqueteService.deleteEnquete(id);
-        res.status(200).send({mesage: `Enquete '${id}' foi deletada com sucesso.`});
+        res.status(200).send({ mesage: `Enquete '${id}' foi deletada com sucesso.` });
     } catch (error) {
         res.status(400).json({ message: error.message });
+    }
+};
+
+const listEnquetesPaginacao = async (req, res) => {
+    try {
+        const { limite, pagina } = req.query;
+
+        const result = await enqueteService.getPaginacaoEnquetes(limite, pagina);
+
+        res.status(200).json(result);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
     }
 };
 
@@ -52,7 +64,8 @@ module.exports = {
     getEnquete,
     createEnquete,
     updateEnquete,
-    deleteEnquete
+    deleteEnquete,
+    listEnquetesPaginacao
 }
 
 

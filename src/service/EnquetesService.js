@@ -33,9 +33,31 @@ const deleteEnquete = async (id) => {
     enqueteRepository.deleteEnquete(id)
 };
 
+const getPaginacaoEnquetes = async (limite, pagina) => {
+    const validLimits = [5, 10, 30];
+    const parsedLimit = parseInt(limite, 10);
+    const parsedPage = parseInt(pagina, 10);
+
+    if (!validLimits.includes(parsedLimit)) {
+        throw new Error(`Limite deve ser um dos seguintes valores: ${validLimits.join(", ")}`);
+    }
+
+    if (isNaN(parsedPage) || parsedPage < 1) {
+        throw new Error("Página deve ser um número maior ou igual a 1.");
+    }
+
+    const startIndex = (parsedPage - 1) * parsedLimit;
+    const endIndex = startIndex + parsedLimit;
+
+    const allEnquetes = await enqueteRepository.listAllEnquetes();
+
+    return allEnquetes.slice(startIndex, endIndex);
+}
+
 module.exports = {
     getEnquete,
     createEnquete,
     deleteEnquete,
-    updateEnquete
+    updateEnquete,
+    getPaginacaoEnquetes
 }
