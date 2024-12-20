@@ -1,23 +1,9 @@
 [
   {
     "username": "admin",
-    "password": "1234",
+    "password": "admin",
     "tipo": "admin",
-    "email": "teste@teste.com",
-    "cidade": "teste"
-  },
-  {
-    "username": "Luccas",
-    "password": "1234",
-    "tipo": "admin",
-    "email": "luccas@gmail.com",
+    "email": "teste@gmail.com",
     "cidade": "Londrina"
-  },
-  {
-    "username": "teste",
-    "password": "123456",
-    "tipo": "user",
-    "email": "luccas@gmail.com",
-    "cidade": "maringa"
   }
 ]

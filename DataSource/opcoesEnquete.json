@@ -1,17 +1,47 @@
 [
   {
     "id": 1,
-    "EnqueteId": 1,
-    "opcao": "A"
+    "EnqueteId": 2,
+    "opcao": "Vermelho"
   },
   {
     "id": 2,
-    "EnqueteId": 1,
-    "opcao": "B"
+    "EnqueteId": 2,
+    "opcao": "Verde"
   },
   {
     "id": 3,
+    "EnqueteId": 2,
+        "opcao": "Azul"
+  },
+  {
+    "id": 4,
+    "EnqueteId": 2,
+        "opcao": "Preto"
+  },
+  {
+    "id": 5,
+    "EnqueteId": 2,
+        "opcao": "Branco"
+  },
+  {
+    "id": 6,
     "EnqueteId": 1,
-        "opcao": "C"
+        "opcao": "Menos de 18 anos"
+  },
+  {
+    "id": 7,
+    "EnqueteId": 1,
+        "opcao": "Entre 18 e 40 anos"
+  },
+  {
+    "id": 8,
+    "EnqueteId": 1,
+        "opcao": "Entre 41 e 60 anos"
+  },
+  {
+    "id": 9,
+    "EnqueteId": 1,
+        "opcao": "Mais de 60 anos"
   }
 ]
