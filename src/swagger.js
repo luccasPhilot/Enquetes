@@ -7,7 +7,7 @@ const options = {
         info: {
             title: 'API Documentation',
             version: '1.0.0',
-            description: 'Documentação da API para o sistema de enquetes.',
+            description: 'Documentação da API para o sistema de enquetes. \n\nRepositório do GitHub: [link](https://github.com/luccasPhilot/Enquetes)',
         },
         servers: [
             {

@@ -20,7 +20,7 @@ const createOpcaoEnquete = async (req, res) => {
         const createOpcaoEnquete = await OpcoesEnqueteService.createOpcaoEnquete(opcaoEnquete);
         res.status(201).json(createOpcaoEnquete);
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(404).json({ message: error.message });
     }
 };
 
@@ -56,7 +56,7 @@ const listOpcoesEnquetesPaginacao = async (req, res) => {
 
         res.status(200).json(result);
     } catch (error) {
-        res.status(400).json({ error: error.message });
+        res.status(404).json({ error: error.message });
     }
 }
 

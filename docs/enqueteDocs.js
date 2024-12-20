@@ -24,7 +24,7 @@
  *       400:
  *         description: Dados inválidos ou erro no processamento da solicitação.
  *       404:
- *         description: Enquete não encontrada
+ *         description: Dados inválidos ou erro no processamento da solicitação.
  */
 
 /**
